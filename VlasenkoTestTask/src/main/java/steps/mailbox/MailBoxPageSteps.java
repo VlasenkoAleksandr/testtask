@@ -37,8 +37,9 @@ public class MailBoxPageSteps extends MainPageSteps {
         mailBoxPage.getOpenAnEmail().click();
     }
 
-    public void verifyTheText(){
+    public boolean verifyTheText(){
         wait.until(ExpectedConditions.visibilityOf(mailBoxPage.getEmailText()));
-        System.out.println(mailBoxPage.getEmailText().getText());
+        return mailBoxPage.getEmailText().getText().contains("Hello, world!");
+
     }
 }

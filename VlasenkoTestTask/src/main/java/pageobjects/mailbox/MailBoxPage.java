@@ -35,7 +35,7 @@ public class MailBoxPage extends MainPage{
         return sendMessage;
     }
 
-    @FindBy(css = ".n1 > a:nth-child(1)")
+    @FindBy(css = "a[href*='mail/#inbox']")
     private WebElement inBoxButton;
 
     public WebElement getInBoxButton() {

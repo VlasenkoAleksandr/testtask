@@ -10,6 +10,8 @@ import org.testng.annotations.Test;
 import steps.MainPageSteps;
 import steps.mailbox.MailBoxPageSteps;
 
+import static org.testng.Assert.assertEquals;
+
 
 public class MainTest {
     String testingPage = "https://www.google.com/gmail/";
@@ -31,22 +33,25 @@ public class MainTest {
     }
 
     @Test()
-    public void mainTest(){
+    public void mainTest() throws InterruptedException {
         TestsLogger.logMethodName();
 
         mainPageSteps.enterLogin();
         mainPageSteps.clickNext();
         MailBoxPageSteps mailBoxPageSteps = mainPageSteps.enterThePassword();
         mailBoxPageSteps.writeAnEmail();
+        Thread.sleep(1000);
         mailBoxPageSteps.goToInbox();
 
         mailBoxPageSteps.openEmail();
-        mailBoxPageSteps.verifyTheText();
+        boolean text = mailBoxPageSteps.verifyTheText();
+
+        assertEquals(text,true);
     }
 
 
     @AfterMethod()
     public void cleanUpEnv(){
-        driver.quit();
+        driver.close();
     }
 }
